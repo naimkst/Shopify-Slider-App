@@ -1,0 +1,113 @@
+
+
+{{ 'aaaaaaaaaaaaaaaaaaaaa.js' | asset_url | script_tag }}
+
+<!-- top selling product -->
+<div class="top-selling">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="sec-title">
+                    <h2>{{ section.settings.product_slider_section_title }}</h2>                               
+                </div>
+            </div>
+        </div>
+        <!-- tab menu -->
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10">
+                <ul class="nav nav-pills top-selling-tab-menu justify-content-center" id="pills-tab" role="tablist">
+
+                    {% for block in section.blocks %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link {% if forloop.index == 1 %} active {% endif %}" data-toggle="pill" href="#pills-{{ forloop.index }}" role="tab" aria-selected="true">{{ block.settings.collection_name }}</a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+        <!-- tabs -->
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12">
+                <div class="tab-content" id="pills-tabContent">
+                    <!-- tab panel -->
+                    {% for block in section.blocks %}
+                    <div class="tab-pane fade {% if forloop.index == 1 %}show active {% endif %}" id="pills-{{ forloop.index }}">
+                        <div class="owl-carousel owl-theme product-carousel">
+                        
+                        <!-- item -->
+                        {% for product in block.settings.product_collection.products %}
+                            <div class="item">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <img src="{{ product.featured_image.src | img_url: '' }}" class="img-fluid" alt="">
+                                       <a href="{{ product.url }}"><h5>{{ product.title | truncate: 65 }}</h5></a> 
+                                        <p>{{ product.price | money }}</p>
+
+                                        <form method="post" action="/cart/add">
+                                            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                            <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                            <input type="submit" value="Add to cart" class="btn shop-now" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor%}
+                        <!-- item -->
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- tab panel -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- top selling product -->
+
+{% schema %}
+{
+    "settings": [
+        {
+            "type": "text",
+            "id": "product_slider_section_title",
+            "label": "Product Section Title",
+            "default": "Top selling products"
+        }
+    ],
+    "blocks":[
+        {
+            
+        "name": "Product Section",
+        "type": "product",
+        "settings": [
+                {
+                    "type": "text",
+                    "id": "collection_name",
+                    "label": "Collection Name"
+                },
+                {
+                    "type": "collection",
+                    "id": "product_collection",
+                    "label": "Products"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "Product Silder",
+        "blocks": [
+          {
+            "type": "product"
+          }
+        ]
+      }
+    ]
+}
+
+{% endschema %}

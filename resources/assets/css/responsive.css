@@ -1,0 +1,415 @@
+/*-------------- Start device screen 1440 --------------*/
+
+@media screen and (max-width: 1440px) {
+    .know-more-btn {
+        padding-left: 70px;
+    }
+
+    .product-carousel.owl-theme .owl-nav .owl-next {
+        right: 0;
+    }
+
+    .product-carousel.owl-theme .owl-nav .owl-prev {
+        left: 0;
+    }
+
+}
+
+/*-------------- Start device screen 1367 --------------*/
+@media screen and (min-width: 1367px) {
+    .lang {
+        right: 80px;
+    }
+}
+
+/*-------------- Start device screen 1366 --------------*/
+
+@media screen and (max-width: 1366px) {
+
+    .steps-img ul li:nth-child(1) {
+        z-index: 4;
+        margin-right: -45px;
+    }
+
+    .steps-img ul li:nth-child(2) {
+        z-index: 3;
+        margin-right: -45px;
+    }
+
+    .steps-img ul li:nth-child(3) {
+        z-index: 2;
+        margin-right: -45px;
+    }
+
+    .steps-img ul li:nth-child(4) {
+        margin-right: -85px;
+    }
+
+    .widget .card {
+        min-height: 170px;
+    }
+
+    .feedback-slider .item::before {
+        right: 80px;
+        height: 80px;
+        width: 100px;
+    }
+
+    .feedback-slider .item {
+        padding-right: 80px;
+    }
+
+}
+
+
+/*-------------- Start device screen 1200 --------------*/
+
+@media screen and (max-width: 1200px) {
+    .middle-header-right li:not(:last-child) {
+        margin-right: 15px;
+    }
+
+    .middle-header-right li a {
+        font-size: 14px;
+    }
+
+    .steps-img ul li img {
+        max-height: 190px;
+    }
+
+    .card-label {
+        font-size: 13px;
+    }
+}
+
+/*-------------- Start device screen 1024 --------------*/
+
+@media screen and (max-width: 1024px) {
+
+    .navigation-bar .menu .menu-item a {
+        padding: 20px 15px;
+    }
+
+    .navigation-bar .menu {
+        justify-content: flex-start;
+    }
+
+    .know-more-btn {
+        padding-left: 20px;
+    }
+
+    .navbar-right-btn::before {
+        right: -32px;
+    }
+
+    .client-feedback p {
+        font-size: 16px;
+        line-height: 25px;
+    }
+
+    .navigation-bar::before {
+        width: 45%;
+    }
+
+    .navigation-bar .menu .menu-item a {
+        padding: 10px 12px;
+    }
+
+    .logo img {
+        margin-top: unset;
+        margin-bottom: unset;
+    }
+
+    .steps-img ul li:nth-child(1),
+    .steps-img ul li:nth-child(2),
+    .steps-img ul li:nth-child(3) {
+        margin-right: -35px;
+    }
+
+    .steps-img ul li:nth-child(4) {
+        margin-right: -15px;
+    }
+
+}
+
+/*-------------- Start device screen 991 --------------*/
+
+@media screen and (max-width: 991px) {
+    .middle-header-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .middle-header-right li:not(:last-child) {
+        margin-right: 30px;
+    }
+
+    .know-more-btn {
+        padding-left: 0;
+        justify-content: center;
+        margin: auto;
+        margin-bottom: 15px
+    }
+
+    .navbar-right-btn::before {
+        right: 50%;
+        transform: translate(45%, -50%);
+    }
+
+    .navigation-bar .menu {
+        justify-content: center;
+    }
+
+    .navigation-bar::before {
+        display: none
+    }
+
+    .navigation-bar .menu .menu-item a {
+        padding: 20px 12px 10px;
+    }
+
+    .steps-img ul li img {
+        max-height: 135px;
+    }
+
+    .steps-img ul li:nth-child(1),
+    .steps-img ul li:nth-child(2),
+    .steps-img ul li:nth-child(3) {
+        margin-right: -30px;
+    }
+
+    .client-feedback::after {
+        display: none
+    }
+
+    .client-feedback::before {
+        width: 100%
+    }
+}
+
+/*-------------- Start device screen 768 --------------*/
+
+@media screen and (max-width: 768px) {
+    .steps-title ul li {
+        line-height: 18px;
+        font-size: 13px;
+    }
+
+    .steps-title-number ul li:not(:last-child)::before {
+        width: 80%;
+        right: -40%;
+    }
+    .sec-title h2 {
+        font-size: 24px;
+    }
+    .sec-title h5 {
+        color: #fff;
+        font-size: 20px;
+    }
+    .top-selling-tab-menu .nav-item .nav-link {
+        padding: 10px 15px;
+        font-size: 14px;
+        border: 1px solid transparent;
+    }
+    .mega-menu li a{
+        font-size: 14px;
+    }
+    .mega-menu h5{
+        font-size: 16px
+    }
+    .mega-menu h4{
+        font-size: 18px
+    }
+
+}
+
+/*-------------- Start device screen 600 --------------*/
+
+@media screen and (max-width: 600px) {
+
+    .lang {
+        z-index: 99;
+    }
+
+    .lang .dropdown-menu .dropdown-item img,
+    .lang .btn img {
+        display: none;
+    }
+
+    .lang .dropdown-menu {
+        left: auto !important;
+    }
+    .cta {
+        padding: 70px 0;
+    }
+    .client-feedback {
+        padding: 70px 0 20px;
+        height: 400px;
+        margin-bottom: 50px;
+    }
+    .steps-img ul li img {
+        max-height: 105px !important;
+    }
+    .hero-slider .item h1 {
+        color: #17325e;
+        font-size: 44px;
+    }
+    .hero-slider .item h2 {
+        font-size: 22px;
+    }
+    .hero-slider .item {
+        min-height: 400px;
+    }
+}
+
+/*-------------- Start device screen 575 --------------*/
+
+@media screen and (max-width: 575px) {
+
+    .logo img,
+    .logo-2 img {
+        display: table;
+        margin: auto;
+    }
+
+    .logo-2 img {
+        margin-bottom: 30px
+    }
+
+    .search-bar .search-btn {
+        right: 15px;
+    }
+
+    .navigation-bar .menu .menu-item a {
+        padding: 20px 12px;
+    }
+
+    .navigation-bar .menu {
+        justify-content: center;
+    }
+}
+
+/*-------------- Start device screen 500 --------------*/
+
+@media screen and (max-width: 500px) {
+    .top-bar {
+        padding-bottom: 35px;
+    }
+
+    .lang {
+        position: absolute;
+        top: 50%;
+        transform: translate(50%, 0);
+        right: 50%;
+    }
+
+    .lang .dropdown-menu {
+        top: 0 !important;
+        right: -10px !important;
+    }
+
+    .lang .dropdown-menu .dropdown-item img,
+    .lang .btn img {
+        display: inline-block;
+    }
+    .client-feedback {
+        height: unset;
+    }
+    .cta h2 {
+        font-size: 24px;
+    }
+    .cta p {
+    	font-size: 16px;
+	}
+	.cta-btn {
+	    position: unset;
+	    transform: translateY(0);
+	    margin-top: 10px;
+	    width: 100%
+	}
+	.feedback-slider .item {
+	    padding-right: 0;
+	}
+	.action-form .form-control {
+	    padding-right: 10px;
+	}
+	.product-carousel.owl-theme .owl-item {
+	    width: 300px !important;
+	}
+}
+
+/*-------------- Start device screen 425 --------------*/
+
+@media screen and (max-width: 425px) {
+    .search-btn {
+        max-width: 80px;
+    }
+
+    .search-btn span {
+        display: none;
+    }
+
+    .search-bar .form-control {
+        padding-right: 85px;
+    }
+
+    .navigation-bar .menu .menu-item a {
+        padding: 20px 5px;
+        font-size: 14px;
+    }
+    .steps-title-number ul li:not(:last-child)::before{
+    	display: none;
+    }
+    .steps-title-number ul{
+    	display: none
+    }
+    .steps-title ul{
+    	display: block;
+    }
+     .steps-title ul li{
+    	width: 100%;
+    }
+     .steps-title ul li:not(:last-child){
+     	margin-bottom: 15px
+     }
+     .steps-img ul li:nth-child(1), .steps-img ul li:nth-child(2), .steps-img ul li:nth-child(3){
+     	margin-right: unset;
+     }
+}
+
+/*-------------- Start device screen 375 --------------*/
+
+@media screen and (max-width: 375px) {
+    .navbar-right-btn::before {
+        display: none
+    }
+
+    .navigation-bar .menu .menu-item a {
+        padding: 20px 10px;
+        font-size: 14px;
+    }
+
+}
+
+/*-------------- Start device screen 320 --------------*/
+
+@media screen and (max-width: 320px) {
+    .hero-slider .item h1 {
+        font-size: 28px;
+    }
+
+    .hero-slider .item h2 {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .hero-slider .item .btn {
+        width: 120px;
+        height: 45px;
+    }
+
+    .hero-slider .item {
+        min-height: 300px;
+    }
+}
