@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //})->middleware(['verify.shopify'])->name('home');
 
-Route::middleware(['verify.shopify'])->group(function (){
+Route::middleware(['verify.shopify', 'billable'])->group(function (){
     Route::get('/home', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
     Route::get('/', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
     Route::get('/theme', 'App\Http\Controllers\DashboardController@getTheme')->name('getTheme');
