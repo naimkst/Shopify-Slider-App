@@ -125,25 +125,31 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         <i class="icon-grid menu-icon"></i>
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <a class="nav-link" href="{{ route('documentation') }}">
                         <i class="icon-layout menu-icon"></i>
-                        <span class="menu-title">UI Elements</span>
-                        <i class="menu-arrow"></i>
+                        <span class="menu-title">Documentation</span>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
                 </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">--}}
+{{--                        <i class="icon-layout menu-icon"></i>--}}
+{{--                        <span class="menu-title">UI Elements</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
+{{--                    <div class="collapse" id="ui-basic">--}}
+{{--                        <ul class="nav flex-column sub-menu">--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{ route('home') }}">Home</a></li>--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
             </ul>
         </nav>
         <!-- partial -->
@@ -156,6 +162,30 @@
     <script src="{{ asset('assets/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
+
+    @if(\Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_enabled'))
+        <script src="https://unpkg.com/@shopify/app-bridge{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
+        <script src="https://unpkg.com/@shopify/app-bridge-utils{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
+        <script
+            @if(\Osiset\ShopifyApp\Util::getShopifyConfig('turbo_enabled'))
+            data-turbolinks-eval="false"
+            @endif
+        >
+            var AppBridge = window['app-bridge'];
+            var actions = AppBridge.actions;
+            var utils = window['app-bridge-utils'];
+            var createApp = AppBridge.default;
+            var app = createApp({
+                apiKey: "{{ \Osiset\ShopifyApp\Util::getShopifyConfig('api_key', $shopDomain ?? Auth::user()->name ) }}",
+                shopOrigin: "{{ $shopDomain ?? Auth::user()->name }}",
+                host: "{{ \Request::get('host') }}",
+                forceRedirect: false,
+            });
+        </script>
+
+@include('shopify-app::partials.token_handler')
+@endif
+
     @yield('scripts')
 </body>
 

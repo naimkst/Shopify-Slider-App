@@ -141,6 +141,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         @parent
     <script>
+
         function getMessage() {
             var checkvalue = document.getElementById("sectionON").checked;
 
@@ -150,11 +151,12 @@
                     headers: {
                         "_token": "{{ csrf_token() }}",
                     },
-                    type:'GET',
+                    type:'POST',
                     url: '{{route("sliderOnOff")}}',
                     data:{
                         _token: "{{ csrf_token() }}",
                         _host: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
+                        auth: '{{\Illuminate\Support\Facades\Auth::user() }}',
                         slug: 'Slider Section',
                         value: 1,
                     },
@@ -167,11 +169,12 @@
                     headers: {
                         "_token": "{{ csrf_token() }}",
                     },
-                    type:'GET',
+                    type:'POST',
                     url: '{{route("sliderOnOff")}}',
                     data:{
                         _token: "{{ csrf_token() }}",
-                        _host: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
+                        _host: '{{\Illuminate\Support\Facades\Auth::user()->name }}',
+                        auth: '{{\Illuminate\Support\Facades\Auth::user() }}',
                         slug: 'Slider Section',
                         value: 0,
                     },

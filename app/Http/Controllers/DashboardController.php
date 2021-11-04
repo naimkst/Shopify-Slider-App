@@ -12,26 +12,49 @@ use GuzzleHttp\Client;
 class DashboardController extends Controller
 {
     public function dashboard(){
-
-
         $data['user'] = Auth::user();
-
-
-
         return view('dashboard', $data);
     }
     public function sliderOnOff(Request $request){
+        // User All Data Get
+        $user = $request->_host;
+
+        //Shopify Shop Access Token
+        $accessToken = "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";
+
+        $abc = $request->auth;
+        dd(Auth::user());
+
+        //Get Current Theme
+        $theme = $user->api()->rest('GET', '/admin/themes.json');
+        $activeTheme = $theme['body']['container']['themes'];
+        $acttime = [];
+        foreach ($activeTheme as $maintheme){
+            if($maintheme['role'] == 'main'){
+                $acttime = $maintheme['id'];
+            }
+        }
+
+        //Data Save Active Or not
         if ($request->value == 1){
             $value = 1;
         }else{
             $value = 0;
         }
-        $data = AdminSettings::updateOrCreate(['slug' => $request->slug], ['value' => $value]);
+
+        if ($value == 1){
+            $data = AdminSettings::updateOrCreate(['slug' => $request->_host], ['value' => $value]);
+            //Insert All Data
+
+        }
+        else{
+            $data = AdminSettings::updateOrCreate(['slug' => $request->_host], ['value' => $value]);
+        }
     }
 
     public function home(){
+        return view('dashboard');
         $user = Auth::user();
-
         $accessToken = "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";
         $shop = "app-development-qa.myshopify.com";
         $theme = $user->api()->rest('GET', '/admin/themes.json');
@@ -193,5 +216,9 @@ class DashboardController extends Controller
         $user = auth()->user()->api()->rest('GET', '/admin/api/2021-10/themes.json');
         $theme = 1;
         dd($user);
+    }
+    public function documentation(){
+        $data['user'] = Auth::user();
+        return view('documentation', $data);
     }
 }

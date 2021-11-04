@@ -21,13 +21,16 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //})->middleware(['verify.shopify'])->name('home');
 
-Route::group(['middleware' => ['verify.shopify']], function () {
+Route::middleware(['verify.shopify'])->group(function (){
+    Route::get('/home', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
     Route::get('/', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
-    Route::get('/home', 'App\Http\Controllers\DashboardController@dashboard')->name('home');
     Route::get('/theme', 'App\Http\Controllers\DashboardController@getTheme')->name('getTheme');
-
+    Route::get('/documentation', 'App\Http\Controllers\DashboardController@documentation')->name('documentation');
+    Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff');
 
 });
-Route::get('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff')->middleware("auth.custom.shopify");
+//Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff')->middleware("auth.custom.shopify", 'verify.shopify');
 
-
+//Route::group(['middleware' => ['verify.shopify']], function () {
+//
+//});
