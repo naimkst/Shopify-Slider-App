@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 //})->middleware(['verify.shopify'])->name('home');
 
 Route::middleware(['verify.shopify', 'billable'])->group(function (){
-    Route::get('/home', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
     Route::get('/', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
+    Route::get('/home', 'App\Http\Controllers\DashboardController@home')->name('home');
     Route::get('/theme', 'App\Http\Controllers\DashboardController@getTheme')->name('getTheme');
     Route::get('/documentation', 'App\Http\Controllers\DashboardController@documentation')->name('documentation');
     Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff');
