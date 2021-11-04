@@ -23,9 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['verify.shopify']], function () {
     Route::get('/', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
-    Route::get('/home', 'App\Http\Controllers\DashboardController@home')->name('home');
+    Route::get('/home', 'App\Http\Controllers\DashboardController@dashboard')->name('home');
     Route::get('/theme', 'App\Http\Controllers\DashboardController@getTheme')->name('getTheme');
+
+
 });
-Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff');
+Route::get('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff')->middleware("auth.custom.shopify");
 
 

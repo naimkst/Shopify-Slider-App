@@ -33,8 +33,8 @@
                                     <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
                                 </div>
                                 <div class="ml-2">
-                                    <h4 class="location font-weight-normal">Bangalore</h4>
-                                    <h6 class="font-weight-normal">India</h6>
+                                    <h4 class="location font-weight-normal">Großaitingen</h4>
+                                    <h6 class="font-weight-normal">Germany</h6>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,6 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         @parent
     <script>
-
         function getMessage() {
             var checkvalue = document.getElementById("sectionON").checked;
 
@@ -149,12 +148,13 @@
             if(checkvalue == true){
                 $.ajax({
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type:'POST',
-                    url: '/slider-switch',
-                    data:{
                         "_token": "{{ csrf_token() }}",
+                    },
+                    type:'GET',
+                    url: '{{route("sliderOnOff")}}',
+                    data:{
+                        _token: "{{ csrf_token() }}",
+                        _host: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
                         slug: 'Slider Section',
                         value: 1,
                     },
@@ -165,12 +165,13 @@
             }else{
                 $.ajax({
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type:'POST',
-                    url: '/slider-switch',
-                    data:{
                         "_token": "{{ csrf_token() }}",
+                    },
+                    type:'GET',
+                    url: '{{route("sliderOnOff")}}',
+                    data:{
+                        _token: "{{ csrf_token() }}",
+                        _host: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
                         slug: 'Slider Section',
                         value: 0,
                     },
@@ -179,7 +180,6 @@
                     }
                 });
             }
-
         }
     </script>
 @endsection

@@ -12,7 +12,12 @@ use GuzzleHttp\Client;
 class DashboardController extends Controller
 {
     public function dashboard(){
+
+
         $data['user'] = Auth::user();
+
+
+
         return view('dashboard', $data);
     }
     public function sliderOnOff(Request $request){
@@ -26,6 +31,7 @@ class DashboardController extends Controller
 
     public function home(){
         $user = Auth::user();
+
         $accessToken = "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";
         $shop = "app-development-qa.myshopify.com";
         $theme = $user->api()->rest('GET', '/admin/themes.json');
@@ -160,11 +166,7 @@ class DashboardController extends Controller
 
         dd($putvalue);
 
-
-
-
-            $response = $user->api('GET', '/admin/themes/128464126179/assets.json?asset[key]=layout/theme.liquid');
-
+        $response = $user->api('GET', '/admin/themes/128464126179/assets.json?asset[key]=layout/theme.liquid');
 
 //        $scriptPush = $user->api('https://app-development-qa.myshopify.com/admin/api/2021-10/script_tags.json?script_tag[event]=onload&script_tag[src]=https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.org/fancy.js');
         $scriptPushInsert = array('script_tag' => array(
@@ -182,18 +184,6 @@ class DashboardController extends Controller
         $get = $user->api()->rest('GET', '/admin/api/2021-10/script_tags.json?since_id=421379493');
 
         return $request;
-
-
-
-        $theme = $user->api()->rest('GET', '/admin/themes/'.$acttime.'/assets.json');
-
-        $template = [];
-        foreach($theme['body']['container']['assets'] as $temp){
-            if($temp['key'] == "layout/theme.liquid"){
-
-
-            }
-        }
 
         //File Insert
         dd($insert);
