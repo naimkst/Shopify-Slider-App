@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\AdminSettings;
+use App\Models\UninstallUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,8 @@ class DashboardController extends Controller
                 $acttime = $maintheme['id'];
             }
         }
+
+
         $scriptPushInsertUpdate = array('asset' => array(
             'key' => 'layout/theme.liquid'
         ));
@@ -96,6 +99,7 @@ class DashboardController extends Controller
             'key' => 'layout/theme.liquid',
             'value' => $insertJsUpdate,
         ));
+
         $putvalueStyle = $user->api()->rest('PUT', '/admin/api/2021-10/themes/'.$acttime.'/assets.json', $valuePutUpdate);
 
         //Template Intregate
@@ -119,5 +123,20 @@ class DashboardController extends Controller
     public function uninstall(Request $request){
         $user = $request->all();
         $delete = DB::table("users")->where('name', $user['domain'])->delete();
+        $whereemail = User::where('name', $user['domain'])->first();
+        $data = [
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'domain' => $user['domain'],
+            'country_name' => $user['country_name'],
+            'customer_email' => $user['customer_email'],
+            'shop_owner' => $user['shop_owner'],
+        ];
+        $userDeleteData = DB::table("uninstall_users")->insert($data);
+
+        Log::info('insseeeeeeeeeeeeeeeeerrrrrrrrrrrrr', $userDeleteData);
+        Log::info($delete);
+        Log::info("Delete", $user['domain']);
+        Log::info('okkkkkkkkkkkkkkkk');
     }
 }
