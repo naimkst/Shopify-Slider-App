@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,12 @@ Route::middleware(['verify.shopify', 'billable'])->group(function (){
     Route::get('/theme', 'App\Http\Controllers\DashboardController@getTheme')->name('getTheme');
     Route::get('/documentation', 'App\Http\Controllers\DashboardController@documentation')->name('documentation');
     Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff');
+});
+Route::post('/webhook/app/uninstalled', 'App\Http\Controllers\DashboardController@uninstall')->name('uninstall')->middleware('auth.webhook');
+
+Route::post('/webhooks', function()
+{
+    Log::info('workingg..................................');
 
 });
 //Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff')->middleware("auth.custom.shopify", 'verify.shopify');

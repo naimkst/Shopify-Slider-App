@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\AdminSettings;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Osiset\BasicShopifyAPI\BasicShopifyAPI;
 use Shopify\Clients\Rest;
 use Illuminate\Support\Facades\Http;
@@ -67,33 +70,33 @@ class DashboardController extends Controller
                 $acttime = $maintheme['id'];
             }
         }
-        //Insert All Data
-        //Insert The Script & Style Data
-        $scriptPushInsert = array('asset' => array(
+        $scriptPushInsertUpdate = array('asset' => array(
             'key' => 'layout/theme.liquid'
         ));
-        $requestApi = $user->api()->rest('GET', '/admin/themes/'.$acttime.'/assets.json', $scriptPushInsert);
-        $getValue = $requestApi['body']['container']['asset']['value'];
-        $insertStyle = str_replace("{{ content_for_header }}",
-            "{{ content_for_header }}
-            <link rel=\"stylesheet\" href=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/bootstrap.min_.css\">
-            <link rel=\"stylesheet\" href=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/owl.carousel.min_.css\">
-            ", $getValue
+        $requestApiUpdate = $user->api()->rest('GET', '/admin/themes/'.$acttime.'/assets.json', $scriptPushInsertUpdate);
+        $getValueUpdate = $requestApiUpdate['body']['container']['asset']['value'];
+
+        $insertStyleUpdate = str_replace("{{ content_for_header }}",
+            "{{ content_for_header }}{% include 'product-slider-style' %}", $getValueUpdate
         );
+        $insertStyleUpdate = str_replace("{% include 'product-slider-style' %}{% include 'product-slider-style' %}",
+            "{% include 'product-slider-style' %}", $insertStyleUpdate
+        );
+
         //Script Value Add
-        $insertJs = str_replace("{% section 'footer' %}",
-            "{% section 'footer' %}
-            <script src=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/jquery.min_.js\"></script>
-            <script src=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/bootstrap.min_.js\"></script>
-            <script src=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/owl.carousel.min_.js\"></script>
-            <script src=\"https://cdn.ewebdevs.com/wp-content/uploads/2021/11/scripts.js\"></script>
-            ", $insertStyle
+        $insertJsUpdate = str_replace("{% section 'footer' %}",
+            "{% section 'footer' %}{% include 'product-slider-script' %}", $insertStyleUpdate
         );
-        $valuePut = array('asset' => array(
+
+        $insertJsUpdate = str_replace("{% include 'product-slider-script' %}{% include 'product-slider-script' %}",
+            "{% include 'product-slider-script' %}", $insertJsUpdate
+        );
+
+        $valuePutUpdate = array('asset' => array(
             'key' => 'layout/theme.liquid',
-            'value' => $insertJs,
+            'value' => $insertJsUpdate,
         ));
-        $putvalueStyle = $user->api()->rest('PUT', '/admin/api/2021-10/themes/'.$acttime.'/assets.json', $valuePut);
+        $putvalueStyle = $user->api()->rest('PUT', '/admin/api/2021-10/themes/'.$acttime.'/assets.json', $valuePutUpdate);
 
         //Template Intregate
         $productSlider = file_get_contents(base_path("resources/assets/liquid_template/product-slider.liquid"));
@@ -112,5 +115,9 @@ class DashboardController extends Controller
     public function documentation(){
         $data['user'] = Auth::user();
         return view('documentation', $data);
+    }
+    public function uninstall(Request $request){
+        $user = $request->all();
+        $delete = DB::table("users")->where('name', $user['domain'])->delete();
     }
 }
