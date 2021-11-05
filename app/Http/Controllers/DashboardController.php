@@ -96,7 +96,7 @@ class DashboardController extends Controller
         $putvalueStyle = $user->api()->rest('PUT', '/admin/api/2021-10/themes/'.$acttime.'/assets.json', $valuePut);
 
         //Template Intregate
-        $productSlider = file_get_contents(base_path("resources\assets\liquid_template\product-slider.liquid"));
+        $productSlider = file_get_contents(base_path("resources/assets/liquid_template/product-slider.liquid"));
         $productSliderSave = array('asset' => array('key' => 'sections/product-slider.liquid', 'value'=> $productSlider));
         $insert = $user->api()->rest('PUT', '/admin/themes/'.$acttime.'/assets.json', $productSliderSave);
 
