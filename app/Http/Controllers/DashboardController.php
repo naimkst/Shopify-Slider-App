@@ -149,4 +149,16 @@ class DashboardController extends Controller
         Log::info("Delete", $user['domain']);
         Log::info('okkkkkkkkkkkkkkkk');
     }
+    public function dataRequest(Request $request){
+        $user = $request->all();
+        Log::info('Data Request ###############################################################',$user);
+    }
+    public function customerRedact(Request $request){
+        $user = $request->all();
+        Log::info('Customer Redact ###############################################################',$user);
+    }
+    public function shopRedact(Request $request){
+        $user = $request->all();
+        Log::info('Shop Redact ###############################################################',$user);
+    }
 }
