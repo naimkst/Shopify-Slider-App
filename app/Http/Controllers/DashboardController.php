@@ -107,6 +107,16 @@ class DashboardController extends Controller
         $productSliderSave = array('asset' => array('key' => 'sections/product-slider.liquid', 'value'=> $productSlider));
         $insert = $user->api()->rest('PUT', '/admin/themes/'.$acttime.'/assets.json', $productSliderSave);
 
+        //Snippet Style
+        $productSliderStyle = file_get_contents(base_path("resources/assets/liquid_template/product-slider-style.liquid"));
+        $productSliderStyleSave = array('asset' => array('key' => 'sections/product-slider-style.liquid', 'value'=> $productSliderStyle));
+        $insert = $user->api()->rest('PUT', '/admin/themes/'.$acttime.'/assets.json', $productSliderStyleSave);
+
+        //Snippet Script
+        $productSliderScript = file_get_contents(base_path("resources/assets/liquid_template/product-slider-script.liquid"));
+        $productSliderScriptSave = array('asset' => array('key' => 'sections/product-slider-script.liquid', 'value'=> $productSliderScript));
+        $insert = $user->api()->rest('PUT', '/admin/themes/'.$acttime.'/assets.json', $productSliderScriptSave);
+
         return view('dashboard', $data);
     }
     //Get Theme Data
