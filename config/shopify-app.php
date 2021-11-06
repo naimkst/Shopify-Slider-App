@@ -324,18 +324,6 @@ return [
         [
             'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', ''),
             'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', '')
-        ],
-        [
-            'topic' => env('CUSTOMER_DATA_REQUEST', ''),
-            'address' => env('CUSTOMER_DATA_REQUEST_ADDRESS', '')
-        ],
-        [
-            'topic' => env('CUSTOMER_REDACT', ''),
-            'address' => env('CUSTOMER_REDACT_ADDRESS', '')
-        ],
-        [
-            'topic' => env('SHOP_REDACT', ''),
-            'address' => env('SHOP_REDACT_ADDRESS', '')
         ]
 
 

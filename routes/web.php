@@ -27,7 +27,7 @@ Route::middleware(['verify.shopify', 'billable'])->group(function (){
     Route::post('/slider-switch', 'App\Http\Controllers\DashboardController@sliderOnOff')->name('sliderOnOff');
 });
 Route::post('/webhook/app/uninstalled', 'App\Http\Controllers\DashboardController@uninstall')->name('uninstall')->middleware('auth.webhook');
-Route::post('/webhook/customers/data_request', 'App\Http\Controllers\DashboardController@dataRequest')->name('dataRequest')->middleware('auth.webhook');
-Route::post('/webhook/customers/redact', 'App\Http\Controllers\DashboardController@customerRedact')->name('customerRedact')->middleware('auth.webhook');
-Route::post('/webhook/shop/redact', 'App\Http\Controllers\DashboardController@shopRedact')->name('shopRedact')->middleware('auth.webhook');
+Route::post('/webhook/customers-data-request', 'App\Http\Controllers\DashboardController@dataRequest')->name('dataRequest')->middleware('auth.webhook');
+Route::post('/webhook/customers-redact', 'App\Http\Controllers\DashboardController@customerRedact')->name('customerRedact')->middleware('auth.webhook');
+Route::post('/webhook/shop-redact', 'App\Http\Controllers\DashboardController@shopRedact')->name('shopRedact')->middleware('auth.webhook');
 
