@@ -13,7 +13,6 @@
                 max-width: 1600px;
             }
         }
-
         .product-carousel .item .btn.shop-now {
             width: 145px;
             height: 50px;
@@ -133,107 +132,194 @@
         .sec-title h2 {
             font-weight: 800;
         }
+          .top-selling .card img {
+            width: 100%;
+            height: 370px;
+            object-fit: cover;
+        }
     </style>
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-8">
-                <div class="sec-title">
-                    <h2>{{ section.settings.product_slider_section_title }}</h2>
-                </div>
-            </div>
-        </div>
-        <!-- tab menu -->
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-10">
-                <ul class="nav nav-pills top-selling-tab-menu justify-content-center" id="pills-tab" role="tablist">
 
-                    {% for block in section.blocks %}
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link {% if forloop.index == 1 %} active {% endif %}" data-toggle="pill" href="#pills-{{ forloop.index }}" role="tab" aria-selected="true">{{ block.settings.collection_name }}</a>
-                    </li>
-                    {% endfor %}
+    <div class="top-selling">
+      <div class="container">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-lg-8">
+                  <div class="sec-title">
+                      <h2>{{ section.settings.product_slider_section_title }}</h2>
+                  </div>
+              </div>
+          </div>
+       
+        
+          <!-- tab menu -->
+          <div class="row justify-content-center align-items-center">
+              <div class="col-lg-10">
+                  <ul class="nav nav-pills top-selling-tab-menu justify-content-center" id="pills-tab" role="tablist">
+                      {% for block in section.blocks %}
+                          {% if block.settings.collection_name != blank %}
+                          <li class="nav-item" role="presentation">
+                              <a class="nav-link {% if forloop.index == 1 %} active {% endif %}" data-toggle="pill" href="#pills-{{ forloop.index }}" role="tab" aria-selected="true">{{ block.settings.collection_name }}</a>
+                          </li>
+                          {% endif %}
+                      {% endfor %}
+                  </ul>
+              </div>
+          </div>
+          <!-- tabs -->
+          <div class="row justify-content-center align-items-center">
+              <div class="col-lg-12">
+                  <div class="tab-content" id="pills-tabContent">
+                      <!-- tab panel -->
+                      {% for block in section.blocks %}
+                      <div class="tab-pane fade {% if forloop.index == 1 %}show active {% endif %}" id="pills-{{ forloop.index }}">
+                          <div class="owl-carousel owl-theme product-carousel">
+                            
+                            {% if block.settings.product_collection.products != blank %}
 
-                </ul>
-            </div>
-        </div>
-        <!-- tabs -->
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-12">
-                <div class="tab-content" id="pills-tabContent">
-                    <!-- tab panel -->
-                    {% for block in section.blocks %}
-                    <div class="tab-pane fade {% if forloop.index == 1 %}show active {% endif %}" id="pills-{{ forloop.index }}">
-                        <div class="owl-carousel owl-theme product-carousel">
-                        <!-- item -->
-                        {% for product in block.settings.product_collection.products %}
-                            <div class="item">
-                                <div class="card">
+                                <!-- item -->
+                                {% for product in block.settings.product_collection.products %}
+
+                                <div class="item">
+                                  <div class="card">
                                     <div class="card-body text-center">
-                                        <img src="{{ product.featured_image.src | img_url: '' }}" class="img-fluid" alt="">
-                                       <a href="{{ product.url }}"><h5>{{ product.title | truncate: 65 }}</h5></a>
-                                        <p>{{ product.price | money }}</p>
+                                      <img src="{{ product.featured_image.src | img_url: '' }}" class="img-fluid" alt="">
+                                      <a href="{{ product.url }}"><h5>{{ product.title | truncate: 65 }}</h5></a>
+                                      <p>{{ product.price | money }}</p>
 
-                                        <form method="post" action="/cart/add">
-                                            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                                            <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
-                                            <input type="submit" value="Add to cart" class="btn shop-now" />
-                                        </form>
+                                      <form method="post" action="/cart/add">
+                                        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                        <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                        <input type="submit" value="Add to cart" class="btn shop-now" />
+                                      </form>
                                     </div>
+                                  </div>
                                 </div>
+
+                                {% endfor%}
+                                <!-- item -->
+                            
+                            {% else %}
+
+                             <div class="item">
+                               <div class="card">
+                                 <div class="card-body text-center">
+                                   <img src="https://cdn.ewebdevs.com/wp-content/uploads/2021/11/1.png" class="img-fluid" alt="">
+                                   <a href="#"><h5>Product Title</h5></a>
+                                   <p>{{ '50.0' | money }}</p>
+
+                                   <form method="post" action="#">
+                                     <input type="hidden" name="id" value="" />
+                                     <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                     <input type="submit" value="Add to cart" class="btn shop-now" />
+                                   </form>
+                                 </div>
+                               </div>
                             </div>
-                        {% endfor%}
-                        <!-- item -->
+                            
+                            <div class="item">
+                               <div class="card">
+                                 <div class="card-body text-center">
+                                   <img src="https://cdn.ewebdevs.com/wp-content/uploads/2021/11/2.png" class="img-fluid" alt="">
+                                   <a href="#"><h5>Product Title</h5></a>
+                                   <p>{{ '50.0' | money }}</p>
 
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <!-- tab panel -->
-                </div>
-            </div>
-        </div>
+                                   <form method="post" action="#">
+                                     <input type="hidden" name="id" value="" />
+                                     <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                     <input type="submit" value="Add to cart" class="btn shop-now" />
+                                   </form>
+                                 </div>
+                               </div>
+                            </div>
+                            
+                            <div class="item">
+                               <div class="card">
+                                 <div class="card-body text-center">
+                                   <img src="https://cdn.ewebdevs.com/wp-content/uploads/2021/11/3.png" class="img-fluid" alt="">
+                                   <a href="#"><h5>Product Title</h5></a>
+                                   <p>{{ '50.0' | money }}</p>
+
+                                   <form method="post" action="#">
+                                     <input type="hidden" name="id" value="" />
+                                     <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                     <input type="submit" value="Add to cart" class="btn shop-now" />
+                                   </form>
+                                 </div>
+                               </div>
+                            </div>
+                            
+                            <div class="item">
+                               <div class="card">
+                                 <div class="card-body text-center">
+                                   <img src="https://cdn.ewebdevs.com/wp-content/uploads/2021/11/4.png" class="img-fluid" alt="">
+                                   <a href="#"><h5>Product Title</h5></a>
+                                   <p>{{ '50.0' | money }}</p>
+
+                                   <form method="post" action="#">
+                                     <input type="hidden" name="id" value="" />
+                                     <input min="1" type="number" id="quantity" hidden name="quantity" value="1"/>
+                                     <input type="submit" value="Add to cart" class="btn shop-now" />
+                                   </form>
+                                 </div>
+                               </div>
+                            </div>
+
+                            {% endif %}
+
+                          </div>
+                      </div>
+                      {% endfor %}
+
+                      <!-- tab panel -->
+
+                  </div>
+              </div>
+          </div>
+        
+      </div>
     </div>
-</div>
-<!-- top selling product -->
+    <!-- top selling product -->
 
-{% schema %}
-{
-    "settings": [
-        {
-            "type": "text",
-            "id": "product_slider_section_title",
-            "label": "Product Section Title",
-            "default": "Top selling products"
-        }
-    ],
-    "blocks":[
-        {
-
-        "name": "Product Section",
-        "type": "product",
-        "settings": [
-                {
-                    "type": "text",
-                    "id": "collection_name",
-                    "label": "Collection Name"
-                },
-                {
-                    "type": "collection",
-                    "id": "product_collection",
-                    "label": "Products"
-                }
-            ]
-        }
-    ],
-    "presets": [
-      {
-        "name": "Collection Filter & Slider",
-        "blocks": [
+    {% schema %}
+    {
+      "settings": [
           {
-            "type": "product"
+              "type": "text",
+              "id": "product_slider_section_title",
+              "label": "Product Section Title",
+              "default": "Top selling products"
           }
-        ]
-      }
-    ]
-}
+      ],
+      "blocks":[
+          {
 
-{% endschema %}
+          "name": "Product Section",
+          "type": "product",
+          "settings": [
+                  {
+                      "type": "text",
+                      "id": "collection_name",
+                      "label": "Collection Name",
+                      "default": "Name"
+                  },
+                  {
+                      "type": "collection",
+                      "id": "product_collection",
+                      "label": "Products"
+                  }
+              ]
+          }
+      ],
+      "presets": [
+        {
+          "name": "Product Silder",
+          "blocks": [
+            {
+              "type": "product"
+            }
+          ]
+        }
+      ]
+    }
+
+    {% endschema %}
+
